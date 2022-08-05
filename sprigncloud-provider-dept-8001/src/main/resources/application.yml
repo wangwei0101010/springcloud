@@ -1,0 +1,68 @@
+server:
+  port: 8001
+
+#mybatis配置
+mybatis-plus:
+  type-aliases-package: com.kuang.springcloud.pojo
+  config-location: classpath:mybatis/mybatis-config.xml
+  # xml扫描，多个目录用逗号或者分号分隔（告诉 Mapper 所对应的 XML 文件位置）
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  configuration:
+    # 是否开启自动驼峰命名规则映射:从数据库列名到Java属性驼峰命名的类似映射
+    map-underscore-to-camel-case: true
+    # 如果查询结果中包含空值的列，则 MyBatis 在映射的时候，不会映射这个字段
+    call-setters-on-nulls: false
+    # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用####
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#spring配置
+spring:
+  application:
+    name: springcloud-provider-dept
+  #配置数据源
+  datasource:
+    name: master
+    type: com.alibaba.druid.pool.DruidDataSource
+    #      driver-class-name: com.mysql.jdbc.Driver  mysql8中过时了
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #    mysql8.0版本要加时区  serverTimezone=UTC
+    url: jdbc:mysql://120.246.44.5:30016/mysql?characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false
+    username: root
+    password: Sunbox!@#123456
+    ##druid
+    druid:
+      initialSize: 1
+      minIdle: 3
+      maxActive: 20
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 30000
+      validationQuery: select 'x'
+      testWhileIdle: true
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 20
+      filters: stat,wall,slf4j
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      useGlobalDataSourceStat: true
+      # WebStatFilter配置
+      web-stat-filter:
+        enabled: true
+        # 添加过滤规则
+        url-pattern: /*
+        # 忽略过滤的格式
+        exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
+      # StatViewServlet配置
+      stat-view-servlet:
+        enabled: true
+        # 访问路径为/druid时，跳转到StatViewServlet
+        url-pattern: /druid/*
+        # 是否能够重置数据
+        reset-enable: false
+        # 需要账号密码才能访问控制台
+        login-username: druid
+        login-password: druid123
+
+logging:
+  level:
+    com.kuang.springcloud.dao: DEBUG
