@@ -1,5 +1,5 @@
 server:
-  port: 8001
+  port: 8003
 
 #mybatis配置
 mybatis-plus:
@@ -18,7 +18,7 @@ mybatis-plus:
 #spring配置
 spring:
   application:
-    name: springcloud-provider-dept #负载的话需要3个名称一致,是通过名称来访问的
+    name: springcloud-provider-dept
   #配置数据源
   datasource:
     name: master
@@ -26,7 +26,7 @@ spring:
     #      driver-class-name: com.mysql.jdbc.Driver  mysql8中过时了
     driver-class-name: com.mysql.cj.jdbc.Driver
     #    mysql8.0版本要加时区  serverTimezone=UTC
-    url: jdbc:mysql://120.246.44.5:30016/db1?characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false
+    url: jdbc:mysql://120.246.44.5:30016/db3?characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false
     username: root
     password: Sunbox!@#123456
     ##druid
@@ -73,7 +73,7 @@ eureka:
     service-url:
       defaultZone: http://localhost:7001/eureka/,http://localhost:7002/eureka/,http://localhost:7003/eureka/
   instance:
-    instance-id: springcloud-provider-dept8001 #修改eureka上的默认描述信息
+    instance-id: springcloud-provider-dept8003 #修改eureka上的默认描述信息
 
 #info配置
 info:
