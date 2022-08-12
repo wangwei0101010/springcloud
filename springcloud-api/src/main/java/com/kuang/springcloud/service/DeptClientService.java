@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Component
-@FeignClient(value ="SPRINGCLOUD-PROVIDER-DEPT")
+@FeignClient(value ="SPRINGCLOUD-PROVIDER-DEPT",fallbackFactory =DeptClientServiceFallbackFactory.class)
 public interface DeptClientService {
 
   @GetMapping("/dept/getById/{id}")
